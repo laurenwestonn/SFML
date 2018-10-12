@@ -7,10 +7,8 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(512, 512), "Howdy ho.");
 	sf::Texture playerTexture;
 	playerTexture.loadFromFile("tux.png");
-	//playerTexture.setRepeated(true);
-	//playerTexture.setSmooth(true);
-
-	//sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(512.0f,512.0f));
+	playerTexture.setRepeated(true);
+	playerTexture.setSmooth(true);
 
 
 	Player player(&playerTexture, sf::Vector2u(3, 9), 0.3f, 100.0f);
@@ -59,7 +57,6 @@ int main()
 		player.Update(deltaTime);
 
 		window.clear(sf::Color(180,250,255));
-		//window.setView(view);
 		player.Draw(window);
 		window.display();
 	}

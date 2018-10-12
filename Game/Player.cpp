@@ -49,10 +49,6 @@ void Player::Update(float deltaTime)
 			faceRight = false;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)
-		|| sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		printf("Movement is now %f\n", movement.x);
-
 	animation.Update(row, deltaTime, faceRight);
 	body.setTextureRect(animation.uvRect);
 	body.move(movement);
