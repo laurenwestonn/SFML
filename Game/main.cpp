@@ -1,21 +1,19 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Animation.h"
+#include "Player.h"
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(512, 512), "Howdy ho.");
-	sf::RectangleShape player(sf::Vector2f(50.f,75.f));
-
-
-	player.setPosition((window.getSize().x / 2) - (player.getSize().x / 2), 
-		(window.getSize().y / 2) - (player.getSize().y / 2));
-
 	sf::Texture playerTexture;
 	playerTexture.loadFromFile("tux.png");
-	player.setTexture(&playerTexture);
+	//playerTexture.setRepeated(true);
+	//playerTexture.setSmooth(true);
 
-	Animation animation(&playerTexture, sf::Vector2u(3, 9), 0.3f);
+	//sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(512.0f,512.0f));
+
+
+	Player player(&playerTexture, sf::Vector2u(3, 9), 0.3f, 100.0f);
 
 	float deltaTime = 0.0f;
 	sf::Clock clock;
@@ -38,9 +36,10 @@ int main()
 			}
 		}
 
+		
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
 			window.close();
-
+		/*
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) || 
 			sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 			player.move(-0.1f, 0.0f);
@@ -55,13 +54,13 @@ int main()
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) ||
 			sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-			player.move(0.0f, 0.1f);
+			player.move(0.0f, 0.1f);*/
 
-		animation.Update(0, deltaTime);
-		player.setTextureRect(animation.uvRect);
+		player.Update(deltaTime);
 
 		window.clear(sf::Color(180,250,255));
-		window.draw(player);
+		//window.setView(view);
+		player.Draw(window);
 		window.display();
 	}
 
