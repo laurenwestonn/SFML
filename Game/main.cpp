@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Player.h"
+#include "Level.h"
 
 int main()
 {
@@ -10,8 +11,8 @@ int main()
 	playerTexture.setRepeated(true);
 	playerTexture.setSmooth(true);
 
-
-	Player player(&playerTexture, sf::Vector2u(3, 9), 0.3f, 100.0f);
+	Level level(0, 300, 0, 300);
+	Player player(&playerTexture, sf::Vector2u(3, 9), 0.3f, 100.0f, level);
 
 	float deltaTime = 0.0f;
 	sf::Clock clock;
@@ -34,25 +35,8 @@ int main()
 			}
 		}
 
-		
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
 			window.close();
-		/*
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) || 
-			sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-			player.move(-0.1f, 0.0f);
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) ||
-			sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-			player.move(0.0f, -0.1f);
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) ||
-			sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-			player.move(0.1f, 0.0f);
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) ||
-			sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-			player.move(0.0f, 0.1f);*/
 
 		player.Update(deltaTime);
 
