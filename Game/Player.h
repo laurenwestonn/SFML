@@ -7,17 +7,17 @@ class Player
 {
 public:
 	Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, Level level);
-	~Player();
 
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow& window);
+	bool CanMove(sf::Vector2f playerPosition, Level level);
 
 	sf::Vector2f GetPosition() { return body.getPosition(); }
 
 private: 
 	sf::RectangleShape body;
-	Level level;
 	Animation animation;
+	Level level;
 	unsigned int row;
 	float speed;
 	bool faceRight;

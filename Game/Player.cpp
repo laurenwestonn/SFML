@@ -16,11 +16,6 @@ Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, 
 	body.setTexture(texture);
 }
 
-
-Player::~Player()
-{
-}
-
 void Player::Update(float deltaTime)
 {
 	sf::Vector2f movement(0.0f, 0.0f);
@@ -62,7 +57,7 @@ void Player::Update(float deltaTime)
 	body.move(movement);
 }
 
-bool CanMove(sf::Vector2f playerPosition, Level level)
+bool Player::CanMove(sf::Vector2f playerPosition, Level level)
 {
 	if (playerPosition.x >= level.minXBound & playerPosition.x <= level.maxXBound
 		& playerPosition.y >= level.minYBound & playerPosition.y <= level.maxYBound)

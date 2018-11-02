@@ -8,8 +8,3 @@ Level::Level(float minXBound, float maxXBound, float minYBound, float maxYBound)
 	this->minYBound = minYBound;
 	this->maxYBound = maxYBound;
 }
-
-
-Level::~Level()
-{
-}

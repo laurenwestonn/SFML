@@ -11,7 +11,7 @@ int main()
 	playerTexture.setRepeated(true);
 	playerTexture.setSmooth(true);
 
-	Level level(0, 300, 0, 300);
+	Level level(0, 512, 0, 512);
 	Player player(&playerTexture, sf::Vector2u(3, 9), 0.3f, 100.0f, level);
 
 	float deltaTime = 0.0f;
