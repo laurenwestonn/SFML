@@ -9,8 +9,6 @@ Animation::Animation(sf::Texture* texture, sf::Vector2u imageCount, float switch
 
 	uvRect.width = texture->getSize().x / float(imageCount.x);
 	uvRect.height = texture->getSize().y / float(imageCount.y);
-	// SetRepeated(true);
-	// SetSmooth(true);
 }
 
 
