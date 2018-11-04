@@ -2,10 +2,29 @@
 #include <iostream>
 #include "Player.h"
 #include "Level.h"
+#include "main.h"
+
+int const gridWidth = 6;
+int const gridHeight = 4;
+int grid[gridWidth][gridHeight];
+
+int const tileWidth = 100;
+int const tileHeight = 100;
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(512, 512), "Howdy ho.");
+	// Set the boundary grid items to be walls
+	for (int i = 1; i <= gridWidth; i++)
+		for (int j = 1; j <= gridHeight; j++)
+			if (i == 1 || j == 1 || i == gridWidth || j == gridHeight)
+				grid[i][j] = 2;
+
+	// Set specific parts of the grid to be items
+	grid[2][1] = 1;
+	grid[4][1] = 1;
+	grid[3][3] = 1;
+
+	sf::RenderWindow window(sf::VideoMode(gridWidth * tileWidth, gridHeight * tileHeight), "Howdy ho.");
 	sf::Texture playerTexture;
 	playerTexture.loadFromFile("tux.png");
 	playerTexture.setRepeated(true);

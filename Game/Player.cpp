@@ -1,6 +1,6 @@
 #include "Player.h"
 #include "Level.h"
-
+#include "main.h"
 
 Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, Level level) :
 	animation(texture, imageCount, switchTime)
@@ -26,22 +26,22 @@ void Player::Update(float deltaTime)
 	// Make character move
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)
 		|| sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		if (CanMove(sf::Vector2f(centre.x - (speed * deltaTime), centre.y), halfWidth, halfHeight, level))
+		if (CanMove(sf::Vector2f(centre.x - (speed * deltaTime), centre.y), halfWidth, halfHeight))
 			movement.x -= speed * deltaTime;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)
 		|| sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		if (CanMove(sf::Vector2f(centre.x + (speed * deltaTime), centre.y), halfWidth, halfHeight, level))
+		if (CanMove(sf::Vector2f(centre.x + (speed * deltaTime), centre.y), halfWidth, halfHeight))
 			movement.x += speed * deltaTime;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)
 		|| sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		if (CanMove(sf::Vector2f(centre.x, centre.y - (speed * deltaTime)), halfWidth, halfHeight, level))
+		if (CanMove(sf::Vector2f(centre.x, centre.y - (speed * deltaTime)), halfWidth, halfHeight))
 			movement.y -= speed * deltaTime;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)
 		|| sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		if (CanMove(sf::Vector2f(centre.x, centre.y + (speed * deltaTime)), halfWidth, halfHeight, level))
+		if (CanMove(sf::Vector2f(centre.x, centre.y + (speed * deltaTime)), halfWidth, halfHeight))
 			movement.y += speed * deltaTime;
 
 	// Set the animation
@@ -60,10 +60,24 @@ void Player::Update(float deltaTime)
 	body.move(movement);
 }
 
-bool Player::CanMove(sf::Vector2f playerPosition, float pHalfWidth, float pHalfHeight, Level level)
+
+int GetTile(sf::Vector2f position, float pHalfWidth, float pHalfHeight)
 {
-	if (playerPosition.x - pHalfWidth >= level.minXBound & playerPosition.x + pHalfWidth <= level.maxXBound
-		& playerPosition.y  - pHalfHeight >= level.minYBound & playerPosition.y + pHalfHeight <= level.maxYBound)
+	int tileXLeft = ceil((position.x - pHalfWidth + 1) / tileWidth);
+	int tileXRight = ceil((position.x + pHalfWidth + 1) / tileWidth);
+	int tileYTop = ceil((position.y - pHalfHeight + 1) / tileHeight);
+	int tileYBottom = ceil((position.y + pHalfHeight + 1) / tileHeight);
+
+	// If all of the tiles we are in are inside the boundary, can move 
+	if (tileXLeft > 0 && tileXRight <= gridWidth && tileYTop > 0 && tileYBottom <= gridHeight)
+		return grid[tileXLeft][tileYBottom];
+	else
+		return -1;
+}
+bool Player::CanMove(sf::Vector2f requestedPos, float pHalfWidth, float pHalfHeight)
+{
+	// If the tile the requested position is in has nothing in it, can move
+	if (GetTile(requestedPos, pHalfWidth, pHalfHeight) != -1)
 		return true;
 	else
 		return false;

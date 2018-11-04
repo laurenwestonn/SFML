@@ -10,7 +10,7 @@ public:
 
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow& window);
-	bool CanMove(sf::Vector2f playerPosition, float pHalfWidth, float pHalfHeight, Level level);
+	bool CanMove(sf::Vector2f playerPosition, float pHalfWidth, float pHalfHeight);
 
 	sf::Vector2f GetPosition() { return body.getPosition(); }
 
