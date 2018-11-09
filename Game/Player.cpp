@@ -1,14 +1,11 @@
 #include "Player.h"
-#include "Level.h"
-#include "main.h"
 
-Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, Level level) :
+Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed) :
 	animation(texture, imageCount, switchTime)
 {
 	this->speed = speed;
 	row = 0;
 	faceRight = true;
-	this->level = level;
 
 
 	body.setSize(sf::Vector2f(50.f, 75.f));

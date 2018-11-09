@@ -1,9 +1,22 @@
 #pragma once
+#include "Player.h"
+#include "Thing.h"
+
 class Level
 {
 public:
-	Level(float minXBound = 0, float maxXBound = 0, float minYBound = 0, float maxYBound = 0);
+	Level(Player player, Thing **grid);
 
-	float minXBound, maxXBound, minYBound, maxYBound;
+private:
+	Player player;
+	Thing **grid;
+
+	/*
+	Who gets this?
+	int const gridWidth;
+	int const gridHeight;
+
+	int const tileWidth;
+	int const tileHeight;*/
 };
 

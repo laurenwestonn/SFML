@@ -2,7 +2,6 @@
 #include <iostream>
 #include "Player.h"
 #include "Level.h"
-#include "main.h"
 #include "Thing.h"
 
 int const gridWidth = 6;
@@ -13,7 +12,7 @@ int const tileHeight = 100;
 
 int main()
 {
-	grid = new Thing[gridWidth][gridHeight];
+	Thing **grid;
 	// Set the boundary grid items to be walls
 	for (int i = 1; i <= gridWidth; i++)
 		for (int j = 1; j <= gridHeight; j++)
@@ -31,8 +30,9 @@ int main()
 	playerTexture.setRepeated(true);
 	playerTexture.setSmooth(true);
 
-	Level level(0, 512, 0, 512);
-	Player player(&playerTexture, sf::Vector2u(3, 9), 0.3f, 300.0f, level);
+	Player player(&playerTexture, sf::Vector2u(3, 9), 0.3f, 300.0f);
+
+	Level level(player, grid);
 
 	float deltaTime = 0.0f;
 	sf::Clock clock;

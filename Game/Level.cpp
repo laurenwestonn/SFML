@@ -1,10 +1,8 @@
 #include "Level.h"
 
-
-Level::Level(float minXBound, float maxXBound, float minYBound, float maxYBound)
+Level::Level(Player player, Thing** grid)
 {
-	this->minXBound = minXBound;
-	this->maxXBound = maxXBound;
-	this->minYBound = minYBound;
-	this->maxYBound = maxYBound;
+	this->player = player;
+	//strcpy(this->grid, grid);
+	this->grid = grid;
 }
